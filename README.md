@@ -90,3 +90,46 @@ This computation is done for every point light in the scene. One major differenc
 **constant**, **linear** and **quadratic** are used in the computation of the attenuation component to mimic the light intensity dependency in real life.
 <br>
 **Intensity** is used to fine tune the light’s “power”. As I needed in many cases throughout the project a light which is dimmed on the edges but very powerful to the center.
+<br>
+<br>
+A spotlight is a sub-type of a pointlight, for spotlights we have two extra parameters: **direction**, **cut-off**
+<br>
+If a point light is a point which emits light all around it, in 3D, we can imagine a spotlight as cut-off in that sphere, that would be a cone of light. To calculate which surface of the sphere should be illuminated we need a direction and a cut-off angle. To calculate the cutOff we simply calculate the cos of the desired angle. Then we need to compare the spotFactor with the cutoff to determine if we load the image. We render if spotFactor > cutOff.
+<br>
+**spotFactor = dot(lightDirLocal, spotLightDirection);**
+<br>
+<br>
+I have also implemented HDR, with the purpose of further implementing bloom using Gausian Blur, which I did not succeed. The lower part of the post lamps objects have the HDR shader and one of the lights very bright (100.0f, 100.0f, 100.0f) to show that the texture is not over-exposed.
+<br>
+![hdr](images/hdr.png)
+<br>
+
+## User interface manual :joystick:
+<ul>
+  <li>ESC -> exits the app</li>
+  <li>M -> toggles shadow map</li>
+  <li>Q -> rotate nanosuit on Y axis negative</li>
+  <li>E -> rotate nanosuit on Y axis positive</li>
+  <li>J -> rotate directional light on Y axis negative</li>
+  <li>L -> rotate directional light on Y axis positive</li>
+  <li>G -> toggle fog</li>
+  <li>F -> toggle flashlight</li>
+  <li>X -> change between day and night</li>
+  <li>W -> move forward</li>
+  <li>A -> move to the left</li>
+  <li>S -> move backward</li>
+  <li>D -> move to the right</li>
+  <li>Shift -> sprint</li>
+  <li>LCtrl -> toggle crouch</li>
+  <li>V -> toggle camera view</li>
+  <li>T -> toggle wireframe/solid object view</li>
+</ul>
+<br>
+
+## References
+<ul>
+	<li>https://moodle.cs.utcluj.ro/course/view.php?id=613</li>
+	<li>https://www.youtube.com/watch?v=MAJqiDll0a8&pp=ygUSb3BlbiBnbCBzcG90bGlnaHRz</li>
+	<li>https://learnopengl.com/Advanced-Lighting/HDR</li>
+	<li>https://learnopengl.com/Advanced-Lighting/Bloom</li>
+</ul>
